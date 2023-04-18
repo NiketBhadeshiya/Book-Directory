@@ -1,0 +1,65 @@
+<%- include('./include/_header')%>
+
+
+<main class="site-main">
+    <div class="big-container">
+        <div class="back-btn">
+            <p class="tab-links" onclick="window.history.back()"><i class="fas fa-angle-double-left"></i> Back<br></p>
+        </div>
+
+        <div class="container">
+            <div class="myProfile">
+                <div class="greeting">
+                    <img src="/public/icon/student.png" title="<%=user.name%>">
+                    <h3>Welcome <%= user.name %>
+                    </h3>
+                </div>
+                <div class="profile-details">
+                    <form method="post" id="update-user-profile">
+                        <div class="form-group">
+                            <label for="userName">Username : </label>
+                            <input type="email" name="userName" value="<%=user.userName%>" required>
+                            <input type="hidden" name="id" value="<%= user._id %>">
+                        </div>
+    
+                        <!-- <div class="form-group">
+                            <label for="password">Password : </label>
+                            <input type="password" name="password" value="<%=user.password%>" required>
+                        </div> -->
+    
+                        <div class="form-group">
+                            <label for="name">Name : </label>
+                            <input type="text" name="name" value="<%=user.name%>" required>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="contactNo">Contact No :</label>
+                            <input type="text" name="contactNo" value="<%=user.contactNo%>" required>
+                        </div>
+    
+                        <div class="form-group radio-class">
+                            <label for="gender">Gender : </label>
+                            <div class="radio-buttons">
+                                <div class="radio-inline">
+                                    <input type="radio" name="gender" value="male" <%= user.gender == 'male' ? "Checked" : "" %>>
+                                    <label for="radio-1">Male</label>
+                                </div>
+                                <div class="radio-inline">
+                                    <input type="radio" name="gender" value="female" <%= user.gender == 'female' ? "Checked" : "" %>>
+                                    <label for="radio-2">Female</label>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <button type="submit" user-id="<%=user._id%>">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</main>
+
+<%- include('./include/_footer')%>

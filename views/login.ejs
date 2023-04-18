@@ -1,0 +1,251 @@
+<%- include('./include/_header')%>
+
+    <main class="site-main">
+        <div class="container">
+
+            <div class="sidebar">
+                <ul>
+                    <li><p class="tab-links active-link" onclick="opentab('login-form')">Login <br></p></li>
+                    <li><p class="tab-links" onclick="opentab('register-form')">Register <br></p></li>
+                </ul>
+            </div>
+
+            
+            <div id="login-form" class="margin-left tab-content active-tab">
+                <div class="info" style="margin-bottom: 50px;">
+                    <h2 class="text-dark">Login</h2>
+                    <span class="text-light">Use the given form to login</span>
+                </div>
+
+                <form method="post" id="login_form_submit">
+                    <div class="form-group">
+                        <label for="userName">Username : </label>
+                        <input type="email" name="userName" placeholder="ex@gmail.com" id="login-username">
+                        <p id="login-username-check"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password : </label>
+                        <input type="password" name="password" placeholder="********" id="login-password">
+                        <p id="login-password-check"></p>
+                    </div>
+                    <% if(message != ''){ %>
+                        <div class="form-group">
+                            <p class="message" style="color:red;"><%=message%></p>
+                        </div>
+                    <% } %>
+
+                    <div class="form-group">
+                        <button type="submit">
+                            Login
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <a>New User ? firstly <span onclick="opentab('register-form')" style="color:blue;cursor: pointer;">Register Yourself<br></span></a>
+                    </div>
+                </form>
+            </div>
+
+            <div id="register-form" class="margin-left tab-content">
+                <div class="info" style="margin-bottom: 50px;">
+                    <h2 class="text-dark">Registration</h2>
+                    <span class="text-light">Use the given form to register yourself</span>
+                </div>
+
+                <form method="post" id="register_form_submit" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="userName">Username : </label>
+                        <input type="email" name="userName" placeholder="ex@gmail.com" id="registerUsername">
+                        <p id="usernamecheck"></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password : </label>
+                        <input type="password" name="password" placeholder="********" id="registerPassword">
+                        <p id="passwordcheck"></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpassword">Confirm Password : </label>
+                        <input type="password" name="cpassword" placeholder="********" id="registerConpassword">
+                        <p id="conpasswordcheck"></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">Name : </label>
+                        <input type="text" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactNo">Contact No :</label>
+                        <input type="text" name="contactNo" id="registerContactno">
+                        <p id="contactnocheck"></p>
+                    </div>
+
+                    <div class="form-group radio-class">
+                        <label for="gender">Gender : </label>
+                        <div class="radio-buttons">
+                            <div class="radio-inline">
+                                <input type="radio" name="gender" value="male" id="radio-1">
+                                <label for="radio-1">Male</label>
+                            </div>
+                            <div class="radio-inline">
+                                <input type="radio" name="gender" value="female" id="radio-2">
+                                <label for="radio-2" id="gender">Female</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" id="registerSubmit">Register</button>
+                    </div>
+
+                    <div class="form-group">
+                        <a>Already Registered ? Do <span onclick="opentab('login-form')" style="color:blue;cursor: pointer;">Login <br></span></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        $(document).ready(function(){
+
+            $('#usernamecheck').hide();
+            $('#passwordcheck').hide();
+            $('#conpasswordcheck').hide();
+            $('#contactnocheck').hide();
+
+            var username_err = true;
+            var password_err = true;
+            var conpass_err = true;
+            var contactno_err = true;
+
+
+            $('#registerPassword').keyup(function(){
+                password_check();
+            });
+
+            function password_check(){
+                var pass = $('#registerPassword').val();
+                
+                if(pass.length == ''){
+                    $('#passwordcheck').show();
+                    $('#passwordcheck').html('** Please Enter Your Password **');
+                    $('#passwordcheck').focus();
+                    $('#passwordcheck').css("color","red");
+                    password_err = false;
+                    return false;
+                } else {
+                    $('#passwordcheck').hide();
+                }
+                
+                if(pass.match(/[A-Z]/) && pass.match(/[a-z]/) && pass.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/) && pass.match(/[0-9]/)){
+                    $('#passwordcheck').hide();
+                } else {
+                    $('#passwordcheck').show();
+                    $('#passwordcheck').html('** Password must contain atleat 1 Capital letter, 1 Number & 1 special character **');
+                    $('#passwordcheck').focus();
+                    $('#passwordcheck').css("color","red");
+                    password_err = false;
+                    return false;
+                }
+
+                if(pass.length < 3 || pass.length > 10){
+                    $('#passwordcheck').show();
+                    $('#passwordcheck').html('** Password must be greater than 3 & and less than 10. **');
+                    $('#passwordcheck').focus();
+                    $('#passwordcheck').css("color","red");
+                    password_err = false;
+                    return false;
+                } else {
+                    $('#password-check').hide();
+                }
+            }
+            
+            
+            $('#registerConpassword').keyup(function(){
+                conpass_check();
+            });
+            
+            function conpass_check(){
+                var pass = $('#registerPassword').val();
+                var conpass = $('#registerConpassword').val();
+
+                if(pass != conpass){
+                    $('#conpasswordcheck').show();
+                    $('#conpasswordcheck').html('** Password Not Match **');
+                    $('#conpasswordcheck').focus();
+                    $('#conpasswordcheck').css("color","red");
+                    conpass_err = false;
+                    return false;
+                } else {
+                    $('#conpasswordcheck').hide();
+                }
+            }
+
+
+            $('#registerUsername').keyup(function(){
+                username_check();
+            });
+
+            function username_check(){
+                var user = $('#registerUsername').val();
+
+                if(user.length == ''){
+                    $('#usernamecheck').show();
+                    $('#usernamecheck').html('** Please Enter your mail id **');
+                    $('#usernamecheck').focus();
+                    $('#usernamecheck').css('color','red');
+                    username_err = false;
+                    return false;
+                } else {
+                    $('#usernamecheck').hide();
+                }
+            }
+
+
+            $('#registerContactno').keyup(function(){
+                contact_check();
+            })
+
+            function contact_check(){
+                var contact = $('#registerContactno').val();
+
+                if(contact.length < 10 || contact.length > 10){
+                    $('#contactnocheck').show();
+                    $('#contactnocheck').html('** contact no should be of length 10 **');
+                    $('#contactnocheck').focus();
+                    $('#contactnocheck').css('color','red');
+                    contactno_err = false;
+                    return false;
+                } else {
+                    $('#contactnocheck').hide();
+                }
+            }
+
+            $('#registerSubmit').click(function(){
+                username_err = true;
+                password_err = true;
+                contactno_err = true;
+                conpass_err = true;
+
+                username_check()
+                password_check();
+                conpass_check();
+                contact_check();
+
+                if((username_err == true) && (password_err == true) && (contactno_err == true) && (conpass_err == true)){
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+
+
+        })
+    </script>
+
+
+<%- include('./include/_footer')%>

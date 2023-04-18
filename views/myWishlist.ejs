@@ -1,0 +1,44 @@
+<%- include('./include/_header') %>
+
+<main class="site-main">
+    <div class="big-container">
+        <div class="back-btn">
+            <p class="tab-links" onclick="window.history.back()"><i class="fas fa-angle-double-left"></i> Back<br></p>
+        </div>
+
+        <div class="container wishlist-container">
+            <div class="wishlist-items">
+                <% if(message != ""){ %>
+                    <div class="empty-message">
+                        <h1><%=message%></h1>
+                    </div>
+                <% } else { %>
+                    <table class="table">
+                        <% wishlist.forEach((w)=> { %>
+                            <tr>
+                                <td>
+                                    <img src="/public/bookImages/<%=w.bookId.image%>" alt="<%=w.bookId.image%>">
+                                </td>
+                                <td>
+                                    <div>
+                                        <%= w.bookId.title %> <br><br>
+                                            Author : <%= w.bookId.author %> <br> 
+                                              Price : <%= w.bookId.price %>
+                                    </div>
+                                    <a href="/bookView?id=<%=w.bookId._id%>&userId=<%=user._id%>">View</a>
+                                </td>
+                                <td>
+                                    <a class="remove-from-wishlist" data-id="<%=w.bookId._id%>" user-id="<%=user._id%>" style="cursor:pointer"><i class="fa-solid fa-heart"></i></a>
+                                </td>
+                            </tr>
+        
+                            <% }) %>
+                    </table>
+                <% } %>
+            </div>
+            
+        </div>
+    </div>
+</main>
+
+<%- include('./include/_footer') %>

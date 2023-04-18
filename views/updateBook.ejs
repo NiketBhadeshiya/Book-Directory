@@ -1,0 +1,113 @@
+
+<!-- include header -->
+<%- include('include/_header') %>
+<!-- /include header -->
+
+  <!-- Main Site -->
+  <main id="site-main">
+    <div class="container">
+        <div class="sidebar">
+           <div class="filter">
+                <a href="/admin"><p class="tab-links"><i class="fas fa-angle-double-left"></i> Back<br></p></a>
+           </div>
+        </div>
+        <div class="margin-left update-form">
+            <div class="info">
+                <h2 class="text-dark">Update Book</h2>
+                <span class="text-light">Use the given form to Update a Book</span>
+            </div>
+        
+            <form method="POST" id="update_book" enctype="multipart/form-data">
+                <div class="new_book">
+                    <div class="form-group">
+                        <label for="name" class="text-light">ISBN :</label>
+                        <input type="hidden" name="id" value="<%= book._id %>">
+                        <input type="number" name="isbn" value="<%= book.isbn %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="text-light">Title :</label>
+                        <input type="text" name="title" value="<%= book.title%>" placeholder="example@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="author" class="text-light">Author :</label>
+                        <input type="text" name="author" value="<%= book.author%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="publisher" class="text-light">Publisher :</label>
+                        <input type="text" name="publisher" value="<%= book.publisher%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="editionNumber" class="text-light">editionNumber :</label>
+                        <input type="number" name="editionNumber" value="<%= book.editionNumber%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="language" class="text-light">language :</label>
+                        <input type="text" name="language" value="<%= book.language%>">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="image" class="text-light">image</label>
+                        <input type="text" name="image" value="<%= book.image%>">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="price" class="text-light">price :</label>
+                        <input type="number" name="price" value="<%= book.price%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="page" class="text-light">page :</label>
+                        <input type="number" name="page" value="<%= book.page%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="copyright" class="text-light">copyright :</label>
+                        <input type="text" name="copyright" value="<%= book.copyright%>">
+                    </div>
+                    
+            
+    
+                    <div class="form-group">
+                        <button type="submit" class="btn text-dark update">Save</button>
+                    </div>
+    
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</main>
+<!-- /Main Site -->
+
+<!-- include footer -->
+<%- include('include/_footer') %>
+<!-- /include footer -->
+
+
+
+<!-- extends base.pug 
+
+block content 
+    main#site-main
+        div.container
+            div.box-nav.d-flex-justify-between
+                div.filter
+                    a(href='/')
+                        i.fa-regular.fa-chevrons-left.fas
+                        |  All user
+            div.form-title.text-center
+                h2.text-dark Update User
+                span.text-light Use the below form to update an account
+
+            p Your id : #{users._id}
+            
+            form#update_user(method='put' class='update_user' action=`/api/users/${users._id}`)
+                div.new_user
+                    div.form-group
+                        label.text-light(for='name') Name
+                        input(type='hidden' name='id' value=`${users._id}`)
+                        input(type='text' name='name' value=`${users.name}` placeholder='Niket B')
+                    div.form-group
+                        label.text-light(for='Email') Email
+                        input(type='email' name='email' value=`${users.email}` placeholder='example@gmail.com')
+                    div.form-group
+                        label.text-light(for='mobile') Phone Number
+                        input(type='email' name='mobile' value=`${users.mobile}` placeholder='example@gmail.com')
+        
+    //- script(src="../assets/js/radio")  -->

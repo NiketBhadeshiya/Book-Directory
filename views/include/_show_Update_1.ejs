@@ -1,0 +1,59 @@
+<div class="grid-view">
+    <% books.forEach((b)=> { %>
+        <div class="sub-grid">
+            <a href="/bookView?id=<%=b._id%>&userId=<%=user[0]._id%>">
+                <% if(user[0].userName=='admin@gmail.com' ) { %>
+                    
+                    <div class="img">
+                        <img src="/public/bookImages/<%=b.image%>" alt="<%=b.image%>">
+                    </div>
+     
+                    <div class="book-details">
+                        Name : <%= b.title %> <br>
+                            Price : <%= b.price %> <br>
+                                Language : <%= b.language %> <br>
+                                    Page : <%= b.page %>
+                    </div>
+
+                    <div class="add-remove-display">
+                        <a href="/admin/updatebook?id=<%=b._id%>" class="btn border-shadow update">
+                            <i class="fa-regular fa-pen-to-square fas"></i>
+                        </a>
+                        <a class="btn border-shadow delete" data-id="<%=b._id%>">
+                            <i class="fa-solid fa-trash-can fas"></i>
+                        </a>
+                    </div>
+                <% } else { %>
+                    <div class="img">
+                        <img src="/public/bookImages/<%=b.image%>" alt="<%=b.image%>">
+                    </div>
+    
+                    <div class="book-details">
+                        <span><%= b.title %></span> <br>
+                        Price : <%= b.price %> <br>
+                        Available in <%= b.language %> <br>
+                        Contain <%= b.page %> pages
+                    </div>
+                    <% var found=0 %>
+                    <% wishlist.forEach((w)=> { %>
+                        <% if( w.bookId._id==b._id && found==0 ){ %>
+                            <% found=1 %>
+                        <% } %>
+                    <% }) %>
+    
+                    <div class="add-remove-display">
+                        <% if(found==1) { %>
+                                <a class="remove-from-wishlist" data-id="<%=b._id%>" user-id="<%=user[0]._id%>">
+                                    <i class="fa-solid fa-heart"></i>
+                                </a>
+                        <%} else {%>
+                                <a class="add-to-wishlist" data-id="<%=b._id%>" user-id="<%=user[0]._id%>">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+                        <% } %>
+                    </div>
+                <% } %>
+            </a>
+        </div>
+    <% }) %>
+</div>

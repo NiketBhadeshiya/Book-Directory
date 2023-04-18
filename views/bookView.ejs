@@ -1,0 +1,127 @@
+<!-- include header -->
+<%- include('include/_header') %>
+    <!-- /include header -->
+
+
+    <!-- Main Site -->
+    <main id="site-main">
+        <div class="big-container">
+            <div class="back-btn">
+                <p class="tab-links" onclick="window.history.back()"><i class="fas fa-angle-double-left"></i> Back<br></p>
+            </div>
+
+            <div class="container">
+                <!-- <div class="sidebar">
+                    <ul>
+                        <li>
+                            <a href="/"><p class="tab-links"><i class="fas fa-angle-double-left"></i> Back<br></p></a>
+                        </li>
+                    </ul>
+                </div> -->
+    
+                <div class="bookView">
+    
+                    <div class="book-img">
+                        <div class="img">
+                            <img src="/public/bookImages/<%=book.image%>" alt="<%=book.image%>">
+                        </div>
+                        <div class="buy-cart-button">
+                            <button><a class="add-to-cart" data-id="<%=book._id%>" user-id="<%=user._id%>"> Add to Cart
+                                </a></button>
+                            <button><a class="buy-now"> Buy Now </a></button>
+                        </div>
+                    </div>
+    
+                    <div class="bookDescription">
+                        <div class="book-name">
+                            <%=book.title%>
+                        </div>
+                        <div class="book-price">
+                            <p class="price-tag">Price </p>
+                            <p class="actual-price">
+                                <%=book.price%>
+                            </p>
+                            <% var found = 0 %>
+                            <% wishlist.forEach((w) => { %>
+                                <% if( w.bookId._id == book._id && found == 0 ){ %>
+                                    <% found = 1 %>
+                                <% } %>
+                            <% }) %>
+                            
+                            <% if(found == 1) { %>
+                                <a class="remove-from-wishlist" data-id="<%=book._id%>" user-id="<%=user._id%>" style="padding-top: 10px;cursor: pointer;">
+                                    <i class="fa-solid fa-heart"></i> Added to Wishlist
+                                </a>
+                            <%} else {%>
+                                <a class="add-to-wishlist" data-id="<%=book._id%>" user-id="<%=user._id%>" style="padding-top: 10px;cursor: pointer;">
+                                    <i class="fa-regular fa-heart"></i> Add to Wishlist
+                                </a>
+                                <%}%>
+                        </div>
+                        <table class="bookView-table">
+                            <tbody>
+                                <tr>
+                                    <td>isbn</td>
+                                    <td class="input-data">
+                                        <%=book.isbn%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Author</td>
+                                    <td class="input-data">
+                                        <%=book.author%>
+                                    </td>
+                                </tr>
+                                <% if(book.authorId.description){ %>
+                                    <tr>
+                                        <td>Author Description</td>
+                                        <td class="input-data">
+                                            <%=book.authorId.description%>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <tr>
+                                            <td>Publisher</td>
+                                            <td class="input-data">
+                                                <%=book.publisher%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Edition</td>
+                                            <td class="input-data">
+                                                <%=book.editionNumber%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Language</td>
+                                            <td class="input-data">
+                                                <%=book.language%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Page</td>
+                                            <td class="input-data">
+                                                <%=book.page%>
+                                            </td>
+                                        </tr>
+                                        <% if(book.copyright){ %>
+                                            <tr>
+                                                <td>Copyright</td>
+                                                <td class="input-data">
+                                                    <%=book.copyright%>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- /Main Site -->
+
+
+    <!-- include footer -->
+    <%- include('include/_footer') %>
+        <!-- /include footer -->

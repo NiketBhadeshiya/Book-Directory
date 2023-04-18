@@ -1,0 +1,42 @@
+<div class="myProfile">
+    <div class="greeting">
+        <img src="/public/icon/student.png" title="<%=user[0].name%>">
+        <h3>Welcome <%= user[0].name %>
+        </h3>
+    </div>
+    <div class="profile-details">
+        
+        <table class="profile-table">
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td class="user-input">
+                        <%= user[0].name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td class="user-input">
+                        <%= user[0].userName %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact No.</td>
+                    <td class="user-input">
+                        <%= user[0].contactNo %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td class="user-input">
+                        <%= user[0].gender %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="edit-user-details buy-cart-button">
+        <a href="/editUserDetail/<%=user[0]._id%>" width="fit-content"><button> Edit Details</button></a>
+    </div>
+</div>

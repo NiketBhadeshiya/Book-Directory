@@ -1,0 +1,24 @@
+<ul>
+    
+    <% if(user) { %>
+        <%if(user[0].userName == 'admin@gmail.com') { %>
+            <li><p class="tab-links active-link" onclick="opentab('home')"> Home <br></p></li>
+            <li><p class="tab-links" onclick="opentab('authors')"> Authors <br></p></li>
+            <li><p class="tab-links" onclick="opentab('about')"> About <br></p></li>
+            <li><p class="tab-links"><a href="/admin/addbook" target="_blank">Add Book <br></a></p></li>
+            <li><p class="tab-links"><a href="/admin/addAuthor" target="_blank">Add Author <br></a></p></li>
+            <li><p class="tab-links"><a href="/">Log out</a><br></p></li>
+            <% } else {%>
+                <li><p class="tab-links user-links" style="font-size:18px"><%=user[0].name%> <br></p></li>
+                <li><p class="tab-links active-link" onclick="opentab('home')"> Home <br></p></li>
+                <li><p class="tab-links" onclick="opentab('authors')"> Authors <br></p></li>
+                <li><p class="tab-links" onclick="opentab('about')"> About <br></p></li>
+                <li><p class="tab-links"><a href="/user/myCart/<%=user[0]._id%>" target="_blank"> My Cart </a><br></p></li>
+                <li><p class="tab-links"><a href="/user/myWishlist/<%=user[0]._id%>"> My Wishlist </a><br></p></li>
+                <li><p class="tab-links"> My Order <br></p></li>
+                <li><p class="tab-links" onclick="opentab('myProfile')">  My Profile  <br></p></li>
+                
+                <li><p class="tab-links"><a href="/" onclick="location.reload()">Log out</a><br></p></li>
+                <% } %>
+                <% } %>
+</ul>

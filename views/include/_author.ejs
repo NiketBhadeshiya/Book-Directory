@@ -1,0 +1,62 @@
+<% if(user[0].userName == 'admin@gmail.com') { %>
+    <table class="table">
+        <thead>
+            <tr>
+                <!-- <th>Image</th> -->
+                <th>Author</th>
+                <th>More</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% authors.forEach((a)=> { %>
+                <tr>
+                    <!-- <td>
+                        <img src="#" alt="">
+                    </td> -->
+                    <td>
+                        <div>
+                            <%= a.author %>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="/authorView?id=<%=a._id%>">More..</a>
+                        <a href="/admin/updateauthor?id=<%=a._id%>" class="btn border-shadow update">
+                            <i class="fa-regular fa-pen-to-square fas"></i>
+                        </a>
+                        <a class="btn border-shadow delete-author" data-id="<%=a._id%>">
+                            <i class="fa-solid fa-trash-can fas"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <!-- <th>Image</th> -->
+                    <th>Author</th>
+                    <th>More</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% authors.forEach((a)=> { %>
+                    <tr>
+                        <!-- <td>
+                            <img src="#" alt="">
+                        </td> -->
+                        <td>
+                            <div>
+                                <%= a.author %>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="/authorView?id=<%=a._id%>">More..</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+
+        <% } %>

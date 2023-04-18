@@ -1,0 +1,64 @@
+<% var total_money; %>
+    <% total_money=0 %>
+        <%- include('./include/_header')%>
+            <main class="site-main">
+                <div class="container cart-container">
+                    <% if(message !="" ){ %>
+                        <div class="empty-cart">
+                            <h1>
+                                <%=message%>
+                            </h1>
+                        </div>
+                        <% } else { %>
+                            <div class="cart-items">
+                                <table class="cart-table">
+                                    <% cart.forEach((c)=> { %>
+                                        <tr>
+                                            <td>
+                                                <img src="/public/bookImages/<%=c.bookId.image%>"
+                                                    alt="<%=c.bookId.image%>">
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <%= c.bookId.title %> <br>
+                                                        Author : <%= c.bookId.author %> <br>
+                                                            Price <p class="book-price">
+                                                                <%= c.bookId.price %>
+                                                            </p>
+                                                </div>
+                                                <a href="/bookView?id=<%=c.bookId._id%>&userId=<%=user._id%>"
+                                                    target="_blank">View</a>
+                                                <a class="remove-cart-item" data-id="<%=c.bookId._id%>"
+                                                    user-id="<%=user._id%>" style="cursor:pointer">Remove</a>
+                                            </td>
+                                        </tr>
+
+                                        <% }) %>
+                                </table>
+                                <div class="place-order-btn">
+                                    <button class="place-btn">Place Order</button>
+                                </div>
+                            </div>
+                            <div class="price-detail">
+                                <h3>Price Detail</h3>
+                                <% cart.forEach((c)=> { %>
+                                    <div class="price" style="text-align : right;">
+                                        <%=c.bookId.price%>
+                                            <% total_money=total_money + c.bookId.price %>
+                                    </div>
+                                    <% }) %>
+                                        <div class="price" style="text-align : right;">
+                                            Delivery charge : 50
+                                            <% total_money=total_money + 50 %>
+                                        </div>
+                                        <div class="total" style="text-align : right;">
+                                            Total Amount : <%=total_money%>
+                                        </div>
+                            </div>
+                            <% } %>
+                </div>
+            </main>
+
+
+            <%- include('./include/_footer')%>

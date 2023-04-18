@@ -1,0 +1,67 @@
+<!-- include header -->
+<%- include('include/_header') %>
+    <!-- /include header -->
+
+
+    <!-- Main Site -->
+    <main id="site-main">
+        <div class="container">
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a onclick="window.history.back()" style="cursor: pointer;">
+                            <p class="tab-links"> Back<br></p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="authorView tab-content active-tab">
+                <div class="author-name">
+                    <%=author.author%>
+                </div>
+
+                <div class="about-author">
+                    <%=author.description%>
+                </div>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Image</th>
+                            <th>Overview</th>
+                            <th>More</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% books.forEach((b)=> { %>
+                            <tr>
+                                <td>
+                                    <img src="/public/bookImages/<%=b.image%>" alt="<%=b.image%>">
+                                </td>
+                                <td>
+                                    <div>
+                                        Name : <%= b.title %> <br>
+                                            Price : <%= b.price %> <br>
+                                                Language : <%= b.language %> <br>
+                                                    Page : <%= b.page %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="/bookView?id=<%=b._id%>">View</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </main>
+    <!-- /Main Site -->
+
+
+    <!-- include footer -->
+    <%- include('include/_footer') %>
+        <!-- /include footer -->
