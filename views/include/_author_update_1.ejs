@@ -1,0 +1,9 @@
+<div class="author-grid">
+    <% authors.forEach((a) => { %> 
+        <div class="grid">
+            <a href="/authorView?id=<%=a._id%>&userId=<%=user[0]._id%>">
+                <%= a.author %>
+            </a>
+        </div>
+    <% }) %>
+</div>
